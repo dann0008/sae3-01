@@ -1,0 +1,61 @@
+{% include 'ter/show.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/liste_TER.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="infos_param"><br>
+        {% if ter.CandidatsInteresed|length > 0 %}
+            {% for etu in ter.candidatsInteresed %}
+                <p style="text-align: justify-all"><strong>Séléctionné par : </strong>{{ etu.getNom() }}</p>
+            <a href="{{ path('affect_ter_to_user', {'ter_id': ter.id ,  'user_id':etu.getId()}) }}" class="btn btn-primary mr-3">
+                accepter                    </a>
+            <!-- Bouton "Refuser" -->
+            <a href="{{ path('unaffect_ter_to_user', {'ter_id': ter.id ,  'user_id':etu.getId()}) }}" class="btn btn-primary mr-3">
+                Refuser                    </a>
+            {% endfor %}
+        {% else %}
+        <p style="text-align: justify; color: red"><strong>Vous n'avez pas de candidatures pour votre Ter</strong></p>
+        {% endif %}
+        <a href="{{ path('terUpdate', {'id': ter.id}) }}" class="btn btn-primary">Modifier</a>
+        <a href="{{ path('terdelete', {'id': ter.id}) }}" class="btn btn-danger">Supprimer</a>
+        <a href="{{ path('terProf') }}" class="btn btn-primary">Retourner à la liste de vos TER</a>
+    </div>
+
+    <script>
+        // Récupérez les boutons à l'aide de leurs IDs
+        const acceptButton = document.getElementById('accept-button');
+        const rejectButton = document.getElementById('reject-button');
+
+        // Définissez des fonctions de gestion d'événements pour les boutons
+        acceptButton.addEventListener('click', function() {
+            // Envoyez une requête pour mettre à jour l'attribut "Ter" de l'utilisateur avec la valeur "true"
+            fetch('/update-user-attribute', {
+                method: 'POST',
+                body: JSON.stringify({
+                    user: 'etu',
+                    attribute: 'ter',
+                    value: true
+                })
+            });
+        });
+
+        rejectButton.addEventListener('click', function() {
+            // Envoyez une requête pour mettre à jour l'attribut "Ter" de l'utilisateur avec la valeur "false"
+            fetch('/update-user-attribute', {
+                method: 'POST',
+                body: JSON.stringify({
+                    user:'etu',
+                    attribute: 'ter',
+                    value: false
+                })
+            });
+        });
+    </script>
+
+
+{% endblock %}
+

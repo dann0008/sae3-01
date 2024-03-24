@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page des CV{% endblock %}
+
+{% block body %}
+
+    <h1>Ajouter un CV</h1>
+
+    {{ form_start(form, {'method': 'POST'}) }}
+    {{ form_row(form.cv, {'label': 'Choissisez votre fichier (5Mo Maximum)' }) }}
+    {{ form_widget(form.save, {'label': 'Envoyer votre CV'}) }}
+    {{ form_end(form) }}
+
+{% endblock %}

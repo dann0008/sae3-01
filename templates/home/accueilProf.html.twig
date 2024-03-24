@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% set titre = "Page d'Accueil" %}
+{% block title %}{{ titre }}{% endblock %}
+{% block body %}
+<link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel='stylesheet'>
+<link href="{{ asset('assets/css/pages_acceuils.css') }}" rel="stylesheet">
+
+    {#<!DOCTYPE html>#}
+{#<html lang="fr">#}
+{#{% block header %}#}
+{#    <head>#}
+{#        <meta charset="utf-8">#}
+{#        <meta content="width=device-width, initial-scale=1.0" name="viewport">#}
+{#        <title>Page d'acceuil des professeurs</title>#}
+{#        <meta content="" name="description">#}
+{#        <meta content="" name="keywords">#}
+{#        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">#}
+{#        <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">#}
+{#        <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">#}
+{#        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel='stylesheet'>#}
+{#        <link href="{{ asset('assets/vendor/bootstrap/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">#}
+{#        <link href="{{ asset('assets/css/pages_acceuils.css') }}" rel="stylesheet">#}
+{#    </head>#}
+{#{% endblock %}#}
+{#{% block body %}#}
+{#    <body>#}
+{#    <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>#}
+{#    <header id="header" style="background:#28334AFF;">#}
+{#        <div class="d-flex flex-column">#}
+
+{#            <div class="profile">#}
+{#                <img src="{{ asset('assets/img/jake-plus_4x.webp') }}" alt="" class="img-fluid rounded-circle">#}
+{#                <h1 class="text-light">Maher zizouni</h1>#}
+
+{#            </div>#}
+
+{#            <nav id="navbar" class="nav-menu navbar">#}
+{#                <ul>#}
+{#                    <li><a href="#" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Actualités</span></a></li>#}
+{#                    <li><a href="#"class="nav-link scrollto"><i class="bx bx-server"></i> <span>Intranet</span></a></li>#}
+{#                    <li><a href="#" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>E.D.T</span></a></li>#}
+{#                    <li><a href="#" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Messagerie URCA</span></a></li>#}
+{#                    <li><a href="#" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>T.E.R</span></a></li>#}
+{#                    <li><a href="#" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Logiciels</span></a></li>#}
+{#                    <li><a href="#" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Assistance</span></a></li>#}
+{#                    <li><a href="{{ path('app_jeu') }}" class="nav-link scrollto"><span>Pour passer le temps :)</span></a></li>#}
+{#                </ul>#}
+{#            </nav>#}
+{#        </div>#}
+{#    </header>#}
+    <main id="main">
+
+
+        <div class="hero" style="  padding: 100px 0; background: linear-gradient(45deg, #28334AFF 30%, #FBDE44FF 99%);">
+            <div class="hero__text">
+                <h1 class="text-reveal">
+                    <span>Conférences organisées par madame Herzog-Evans sur le thème "Covid et criminologie"</span>
+                </h1>
+                <p class="text-reveal">COVIDJUSTICE<br><br>
+
+                    JANUARY 29TH 2021 (13:30-17:30)<br>
+                    Criminal law in times of COVID: law of exception or new normal?<br><br>
+
+                    Prof. Frieder Dünkel, PhD (University of Greifswald)<br><br>
+
+                    Discussing:<br>
+                    Alice Dejean de la Bâtie, PhD (URCA)
+                </p>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div class="tile">
+                <img src='https://images.unsplash.com/photo-1464054313797-e27fb58e90a9?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=996&q=80'/>
+                <div class="text">
+                    <h1>700 programmes de bourses </h1>
+                    <h2 class="animate-text">Appels d'offres. Formations et mobilités</h2>
+                    <a href="https://www.univ-reims.fr/international/appels-d-offres/appels-d-offres.-formations-et-mobilites,19733,33344.html"></a>
+                </div>
+            </div>
+
+
+            <div class="tile">
+                <img src='https://images.unsplash.com/photo-1422393462206-207b0fbd8d6b?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1000&q=80'/>
+                <div class="text">
+                    <a href="https://www.univ-reims.fr/orientation-et-insertion/transition-lycee-universite/un-jour-a-l-universite/un-jour-a-l-universite,25687,42344.html">
+                        <h1>A l'Université</h1></a>
+                    <h2 class="animate-text">Un jour à l'Université</h2>
+                    <p class="animate-text">Vous êtes lycéens, en première ou en terminale, et vous souhaitez savoir si l'université est faite pour vous ?</p>
+                </div>
+            </div>
+
+            <div class="tile">
+                <img src='https://images.unsplash.com/photo-1458668383970-8ddd3927deed?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1004&q=80'/>
+                <div class="text">
+                    <a href="https://www.univ-reims.fr/recherche-innovation-et-valorisation/unites-de-recherche/unites-de-recherche-par-ordre-alphabetique,8714,18422.html">
+                        <h1>Recherche</h1></a>
+                    <h2 class="animate-text">Unités de Recherche par ordre alphabétique</h2>
+                </div>
+            </div>
+        </div>
+
+        </div><div class="wrap">
+            <div class="tile">
+                <img src="https://images.unsplash.com/photo-1458668383970-8ddd3927deed?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1004&q=80"  />
+                <div class="text">
+                    <a href="https://www.univ-reims.fr/vie-des-campus/actualites/la-ceremonie-de-remise-des-diplomes-des-campus-croix-rouge-et-moulin-de-la-housse,10227,18297.html?args=AlQ8JO5eyd_FoelMj3D9TXplg2qik5GJLIdZrGMBWfXLmf9ylFbS8tayDZz3I_d0f8ktI0FEjcBhJ9vUnHk8wQ">
+                        <h1>Diplômes</h1></a>
+                    <h2 class="animate-text">La cérémonie de remise des diplômes des campus Croix Rouge et Moulin de la Housse</h2>
+                </div>
+            </div>
+
+
+            <div class="tile">
+                <img src='https://images.unsplash.com/photo-1464054313797-e27fb58e90a9?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=996&q=80' />
+                <div class="text">
+                    <a href="https://www.univ-reims.fr/vie-des-campus/actualites/participation-de-l-urca-a-la-6eme-edition-du-salon-des-etudes-en-france-a-bruxelles-en-belgique,10227,18297.html?args=AlQ8JO5eyd_FoelMj3D9TXplg2qik5GJLIdZrGMBWfXz5Do6o9u79TTumNW%2AM5MbdvBvA1lw9V66Fax8gt5fcQ">
+                        <h1>SALON DES ETUDES</h1></a>
+                    <h2 class="animate-text">Participation de l’URCA à la 6ème édition du SALON DES ETUDES EN FRANCE à Bruxelles en Belgique</h2>
+                </div>
+            </div>
+
+            <div class="tile">
+                <img src='https://images.unsplash.com/photo-1422393462206-207b0fbd8d6b?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1000&q=80'/>
+                <div class="text">
+                    <a href="https://www.univ-reims.fr/jpo/accueil/journee-portes-ouvertes,13481,23400.html">
+                        <h1>Journée Portes Ouvertes</h1></a>
+                    <h2 class="animate-text">Journée Portes Ouvertes</h2>
+                </div>
+            </div>
+        </div>
+        </div><br><br>
+
+        <div class="hero" style="  padding: 100px 0; background: linear-gradient(45deg, #28334AFF 18%, #FBDE44FF 99%);">
+            <div class="hero__text">
+                <h1 class="text-reveal">
+                    <span>Informations pédagogiques liées à la COVID19</span>
+                </h1>
+                <p class="text-reveal">Mettre en œuvre la continuité pédagogique, c’est permettre à chaque étudiant de poursuivre sa formation en utilisant des modalités différentes du présentiel, mais en conservant un rythme d’apprentissage. Il ne s’agit pas de reproduire le présentiel à distance mais d’utiliser des outils, des supports, des modalités qui vont permettre aux étudiants de continuer leurs apprentissages dans un mode certes potentiellement dégradé, mais qui a pour objectif de préserver le lien pédagogique au sein des formations.<br><br>
+
+                    L’URCA met à la disposition de ses enseignants différentes plateformes et différents outils pour permettre de produire des ressources et des dispositifs d’enseignement qui vont se substituer pour un temps aux modalités de formation et de contrôle des connaissances (contrôles continus). Les enseignants ont toute latitude pour utiliser les outils de l’université ou les outils externes de leur choix pour construire et préserver une forme d’interaction avec leurs étudiants. Idéalement, il s’agit de garder le rythme hebdomadaire du présentiel.<br><br>
+
+                    Dans cet espace, vous trouverez des informations utiles pour vous permettre d’assurer une continuité pédagogique aussi longtemps que cela sera nécessaire.
+                </p>
+            </div>
+        </div>
+
+    </main>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+    {% block javascripts %}
+
+        <script src="{{ asset('assets/js/pages_acceuils.js') }}"></script>
+
+    {% endblock %}
+    </body>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base_no_navbar.html.twig' %}
+
+{% set titre = "Page d'Authentication" %}
+{% block title %}{{ titre }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/style_login.css') }}">
+    {% endblock %}
+
+{% block body %}
+    <div class="container" id="container">
+        <div class="form-container Mot-de-passe-oub">
+            <form method="post" action="{{ path('app_contact_code') }}">
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+                <img src="https://www.univ-reims.fr/media-images/4748/logo-urca-impression.jpg" style="width:145px; height:100px; margin: 35px;">
+                <h2>Recupérer votre compte</h2>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" autocomplete="email" autofocus placeholder="Email universitaire" required>
+                <button>Récupérer mon compte</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form method="post">
+                <img src="https://www.univ-reims.fr/media-images/4748/logo-urca-impression.jpg" style="width:145px; height:100px; margin: 35px;">
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        Email ou Mot de passe incorrect
+                    </div>
+                {% endif %}
+                <h2>Se connecter</h2>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" autocomplete="email" autofocus placeholder="Email universitaire" required>
+                <input type="password" name="password" id="inputPassword" autocomplete="current-password" placeholder="votre mot de passe" required>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <button>Se connecter</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h2>Vous voulez vous connecter ?</h2>
+                    <p style="color: white; font-weight: normal">
+                        Pour se connecter il faut fournir votre email universitaire et votre mot de passe
+                    </p>
+                    <button class="ghost" id="signIn">je veux me connecter</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h2>Vous avez oublié votre mot de passe ?</h2>
+                    <p style="color: white; font-weight: normal">
+                        Récuperez votre compte ici !
+                    </p>
+                    <button class="ghost" id="signUp">Recupérer mon compte</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const signUpButton = document.querySelector('#signUp');
+        const signInButton = document.querySelector('#signIn');
+        const container = document.querySelector('.container');
+
+        signUpButton.addEventListener('click', () =>
+            container.classList.add('right-panel-active')
+        );
+
+        signInButton.addEventListener('click', () =>
+            container.classList.remove('right-panel-active')
+        );
+    </script>
+{% endblock %}

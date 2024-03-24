@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% set titre = "Page d'Accueil" %}
+{% block title %}{{ titre }}{% endblock %}
+{% block body %}
+<link href="{{ asset('assets/css/pages_acceuils.css') }}" rel="stylesheet">
+    <main id="main">
+        <div class="hero" style="  padding: 100px 0; background: linear-gradient(45deg, #2F4F4F 30%, #7CFC00 99%);">
+            <div class="hero__text">
+                <h1 class="text-reveal">
+                    <span>Les élèves ingénieurs en alternance en 2è année de spécialité MGI de l’EiSINe ont réalisé une séance de travaux pratiques en entreprise chez FICAP</span>
+                </h1>
+                <p class="text-reveal"><span>La nouvelle plateforme Mahara permet de créer des portfolios numériques à l'URCA pour valoriser les compétences et les réalisations des étudiants.</span>
+
+                    <span>Chaque étudiant dispose d'un dossier personnel et évolutif dans lequel il pourra rassembler ses meilleurs travaux, ses réflexions, ses intérêts, ses expériences, etc.</span>
+
+                    <span>L'étudiant pourra partager ces portfolios avec différents interlocuteurs s'il le souhaite !</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div class="tile">
+                <img src='https://images.unsplash.com/photo-1464054313797-e27fb58e90a9?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=996&q=80'/>
+                <div class="text">
+                    <a href="https://www.univ-reims.fr/international/appels-d-offres/appels-d-offres.-formations-et-mobilites,19733,33344.html">
+                        <h1>700 programmes de bourses </h1></a>
+                    <h2 class="animate-text">Appels d'offres. Formations et mobilités</h2>
+                </div>
+            </div>
+
+
+            <div class="tile">
+                <img src='https://images.unsplash.com/photo-1422393462206-207b0fbd8d6b?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1000&q=80'/>
+                <div class="text">
+                    <a href="https://www.univ-reims.fr/orientation-et-insertion/transition-lycee-universite/un-jour-a-l-universite/un-jour-a-l-universite,25687,42344.html">
+                        <h1>A l'Université</h1></a>
+                    <h2 class="animate-text">Un jour à l'Université</h2>
+                    <p class="animate-text">Vous êtes lycéens, en première ou en terminale, et vous souhaitez savoir si l'université est faite pour vous ?</p>
+                </div>
+            </div>
+
+            <div class="tile">
+                <img src='https://images.unsplash.com/photo-1458668383970-8ddd3927deed?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1004&q=80'/>
+                <div class="text">
+                    <a href="https://www.univ-reims.fr/recherche-innovation-et-valorisation/unites-de-recherche/unites-de-recherche-par-ordre-alphabetique,8714,18422.html">
+                        <h1>Recherche</h1></a>
+                    <h2 class="animate-text">Unités de Recherche par ordre alphabétique</h2>
+                </div>
+            </div>
+        </div>
+
+        </div><div class="wrap">
+            <div class="tile">
+                <img src="https://images.unsplash.com/photo-1458668383970-8ddd3927deed?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1004&q=80"  />
+                <div class="text">
+                    <a href="https://www.univ-reims.fr/vie-des-campus/actualites/la-ceremonie-de-remise-des-diplomes-des-campus-croix-rouge-et-moulin-de-la-housse,10227,18297.html?args=AlQ8JO5eyd_FoelMj3D9TXplg2qik5GJLIdZrGMBWfXLmf9ylFbS8tayDZz3I_d0f8ktI0FEjcBhJ9vUnHk8wQ">
+                        <h1>Diplômes</h1></a>
+                    <h2 class="animate-text">La cérémonie de remise des diplômes des campus Croix Rouge et Moulin de la Housse</h2>
+                </div>
+            </div>
+
+
+            <div class="tile">
+                <img src='https://images.unsplash.com/photo-1464054313797-e27fb58e90a9?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=996&q=80' />
+                <div class="text">
+                    <a href="https://www.univ-reims.fr/vie-des-campus/actualites/participation-de-l-urca-a-la-6eme-edition-du-salon-des-etudes-en-france-a-bruxelles-en-belgique,10227,18297.html?args=AlQ8JO5eyd_FoelMj3D9TXplg2qik5GJLIdZrGMBWfXz5Do6o9u79TTumNW%2AM5MbdvBvA1lw9V66Fax8gt5fcQ">
+                        <h1>SALON DES ETUDES</h1></a>
+                    <h2 class="animate-text">Participation de l’URCA à la 6ème édition du SALON DES ETUDES EN FRANCE à Bruxelles en Belgique</h2>
+                </div>
+            </div>
+
+            <div class="tile">
+                <img src='https://images.unsplash.com/photo-1422393462206-207b0fbd8d6b?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1000&q=80'/>
+                <div class="text">
+                    <a href="https://www.univ-reims.fr/jpo/accueil/journee-portes-ouvertes,13481,23400.html">
+                        <h1>Journée Portes Ouvertes</h1></a>
+                    <h2 class="animate-text">Journée Portes Ouvertes</h2>
+                </div>
+            </div>
+        </div>
+        </div><br><br>
+
+        <div class="hero" style="  padding: 100px 0; background: linear-gradient(45deg, #2F4F4F 30%, #7CFC00 99%);">
+            <div class="hero__text">
+                <h1 class="text-reveal">
+                    <span>Informations pédagogiques liées à la COVID19</span>
+                </h1>
+                <p class="text-reveal">Mettre en œuvre la continuité pédagogique, c’est permettre à chaque étudiant de poursuivre sa formation en utilisant des modalités différentes du présentiel, mais en conservant un rythme d’apprentissage. Il ne s’agit pas de reproduire le présentiel à distance mais d’utiliser des outils, des supports, des modalités qui vont permettre aux étudiants de continuer leurs apprentissages dans un mode certes potentiellement dégradé, mais qui a pour objectif de préserver le lien pédagogique au sein des formations.<br><br>
+
+                    L’URCA met à la disposition de ses enseignants différentes plateformes et différents outils pour permettre de produire des ressources et des dispositifs d’enseignement qui vont se substituer pour un temps aux modalités de formation et de contrôle des connaissances (contrôles continus). Les enseignants ont toute latitude pour utiliser les outils de l’université ou les outils externes de leur choix pour construire et préserver une forme d’interaction avec leurs étudiants. Idéalement, il s’agit de garder le rythme hebdomadaire du présentiel.<br><br>
+
+                    Dans cet espace, vous trouverez des informations utiles pour vous permettre d’assurer une continuité pédagogique aussi longtemps que cela sera nécessaire.
+                </p>
+            </div>
+        </div>
+    </main>
+
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+    {% block javascripts %}
+
+        <script src="{{ asset('assets/js/pages_acceuils.js') }}"></script>
+
+    {% endblock %}
+    </body>
+{% endblock %}

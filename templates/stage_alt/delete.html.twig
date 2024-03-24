@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{" Suppression de #{stageAlt.nom}"}} {% endblock %}
+
+{% block body %}
+    <h1> {{" Suppression de #{stageAlt.nom}"}} </h1>
+    {{ form_start(form) }}
+        {{ form_row(form, { 'label': 'A compléter' }) }}
+    {{ form_end(form) }}
+{% endblock %}
+

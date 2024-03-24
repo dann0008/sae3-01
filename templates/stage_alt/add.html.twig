@@ -1,0 +1,25 @@
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+    <div class="infos_param"><br>
+    <p style="text-align: justify"><strong>Entreprise du stage : </strong> <a href="{{ path('app_utilisateur_show', {'utilisateur':stageAlt.entreprise.getId()}) }}" class="btn btn-secondary  mr-3">{{ stageAlt.entreprise }}</a></p>
+    <p style="text-align: justify"><strong>Description: </strong>{{ stageAlt.description }}</p>
+        <p style="text-align: justify"><strong>Date du stage: </strong>{{ stageAlt.dateDebut |date("d/m/Y") }} {{ stageAlt.dateFin |date("d/m/Y") }}</p>
+    {% if 'ROLE_ETUDIANT' in user.roles %}
+        </div>
+            <div class="text-center mt-5">
+                    <a href="{{ path('app_stage_alt_candidater', {'id': stageAlt.id}) }}" class="btn btn-primary mr-3">
+                        Ajouter le Stage/Alternance à vos liste candidatures
+                    </a>
+                    <button type="button" class="btn btn-secondary close-btn">Fermer</button>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Ajoutez l'importation de popper.js et de Bootstrap ici -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+{% endblock %}

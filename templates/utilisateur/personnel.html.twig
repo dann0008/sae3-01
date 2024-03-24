@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% set role = 'ROLE_ADMIN' %}
+
+{% block title %}Liste des Personnels{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/trombinoscope.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    <div class="site-container">
+    <div class="site-pusher">
+
+<br>
+    <header class="header">
+        <a href="#" class="header__icon" id="header__icon"></a>
+        <a href="#" class="header__logo">Trombinoscope</a>
+
+        <nav class="menu">
+            <a href="{{ path('app_utilisateur_entreprise') }}">Entreprise</a>
+            <a href="{{ path('app_utilisateur_etudiant') }}">Etudiant</a>
+            <a href="{{ path('app_utilisateur_personnel') }}">Personnel</a>
+        </nav><br>
+
+    </header>
+
+    <h2 style="color: white; font-family: 'roberto'; text-align: center">Personnels de l'URCA</h2><bR>
+
+    <div class="wrapper">
+        <h4><strong>Administrateurs</strong></h4>
+        {% for personnel in personnels %}
+            {% if role not in personnel.roles %}
+                {% set role = 'ROLE_PROFESSEUR' %}
+                <h4><strong>Professeurs</strong></h4>
+            {% endif %}
+            <div class="eleve">
+                <a href="{{ path('app_utilisateur_show', {utilisateur: personnel.id}) }}">
+                    <div class="photo"><img src="{{ '/uploads/photos/' ~ personnel.photo ?? 'default_avatar.png'}}" width="100" alt="photo-{{ personnel.nom }}"></div>
+                    <div class="nom_alter">
+                        <h6>{{ personnel.nom }} {{ personnel.prenom }} </h6>
+                        <a href="mailto:{{ personnel.email }}">Contacter</a>
+                    </div></a>
+            </div>
+        {% endfor %}</div></div></div>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            (function($) {
+
+                $('#header__icon').click(function(e){
+                    e.preventDefault();
+                    $('body').toggleClass('with--sidebar');
+                });
+
+                $('#site-cache').click(function(e){
+                    $('body').removeClass('with--sidebar');
+                });
+
+            })(jQuery);
+
+        });
+    </script>
+
+
+{% endblock %}

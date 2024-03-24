@@ -1,0 +1,132 @@
+/*--------------------
+Mixins
+---------------------*/
+/*--------------------
+Body
+---------------------*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    font-family: "Open Sans Condensed", sans-serif;
+}
+.container3{
+    padding: 25px;
+    background: #6A5ACD;
+}
+
+body {
+    background: #e9e9e9;
+            /*linear-gradient(360deg, white 50%, #6768bd 50.1%);*/
+}
+
+h2 {
+    margin: 20px auto 80px;
+    font-size: 38px;
+    font-weight: 300;
+    text-align: center;
+    letter-spacing: 2px;
+    line-height: 1.5;
+}
+
+details {
+    width: 80%;
+    max-width: 1000px;
+    min-height: 5px;
+    padding: 25px;
+    margin: 0 auto;
+    position: relative;
+    font-size: 16px;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 15px;
+    box-sizing: border-box;
+    transition: all 0s;
+    background-color: #f6f7f8;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);}
+
+details + details {
+    margin-top: 20px;
+}
+
+
+summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+summary:focus {
+    outline: none;
+
+}
+
+summary:focus::after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+summary::-webkit-details-marker {
+    display: none
+}
+
+.control-icon {
+    fill: rebeccapurple;
+    transition: 0s ease;
+    pointer-events: none;
+}
+
+.control-icon-close {
+    display: none;
+}
+
+details[open] .control-icon-close {
+    display: initial;
+    transition: 0s ease;
+}
+
+details[open] .control-icon-expand {
+    display: none;
+}
+
+
+#btn , #btn2{
+    border-color: #6768bd;
+    background-color: #6768bd;
+}
+#btn:hover{
+    border-color: #ef8400;
+    background-color: #ef8400;
+    color: white;
+}
+
+#btn2:hover{
+    border-color: #aa5162;
+    background-color: #aa5162;
+    color: white;
+}
+
+ #btn3{
+     border-color: #aa5162;
+     background-color: #aa5162;
+     color: white;
+ }
+#flash-message {
+    transition: all 0.5s ease-in-out;
+    transform: scale(1);
+}
+
+#flash-message.show {
+    transform: scale(1.5);
+}

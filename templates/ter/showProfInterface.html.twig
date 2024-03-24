@@ -1,0 +1,42 @@
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/liste_TER.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+{% endblock %}
+
+{% block body %}
+
+    <div class="infos_param"><br>
+        <p style="text-align: justify"><strong>Description: </strong>{{ ter.description }}</p>
+        <p style="text-align: justify"><strong>Sélectionné par : </strong></p>
+        {% if ter.CandidatsInteresed|length > 0 %}
+                    {% for etu in ter.candidatsInteresed %}
+                        <p>{{ etu.getNom() }}
+                        <!-- Bouton "Accepter" -->
+                        <a href="{{ path('affect_ter_to_userr', {'ter_id': ter.id ,  'user_id':etu.getId()}) }}" class="btn btn-primary mr-3">
+                            Accepter                    </a>
+                        <!-- Bouton "Refuser" -->
+                        <a href="{{ path('unaffect_ter_to_userr', {'ter_id': ter.id ,  'user_id':etu.getId()}) }}" class="btn btn-primary mr-3">
+                            Refuser                    </a>
+                        <!-- Bouton "Profil" -->
+                        <a href="{{ path('app_utilisateur_show', {'utilisateur':etu.getId()}) }}" class="btn btn-primary mr-3">
+                        Accéder au Profil</a>
+                        </p>
+                    {% endfor %}
+        {% else %}
+                {% if ter.etudiant %}
+                    L'etudiant qui a été affecté est {{ ter.etudiant.nom }}      =>     <a href="{{ path('app_utilisateur_show', {'utilisateur':ter.etudiant.getId()}) }}" class="btn btn-primary mr-3">
+                    Accéder au Profil</a>
+                    <br>
+
+                    {% else %}
+                <p style="text-align: justify; color: #970a3d; text-decoration: underline">Vous n'avez pas de candidatures pour votre Ter</p><br>
+             {% endif %}
+        {% endif %}
+
+        <a href="{{ path('terUpdate', {'id': ter.id}) }}" class="btn btn-primary" style="color:white; background-color: #008400; border-color: #008400">Modifier</a>
+        <a href="{{ path('terdelete', {'id': ter.id}) }}" class="btn btn-danger">Supprimer</a>
+    </div>
+
+
+{% endblock %}

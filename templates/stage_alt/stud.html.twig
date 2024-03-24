@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Liste de vos candidatures de Stages/Alternances
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/css/liste_TER.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    <div style="visibility: hidden; position: absolute; width: 0px; height: 0px;">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <symbol viewBox="0 0 24 24" id="expand-more">
+                <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/><path d="M0 0h24v24H0z" fill="none"/>
+            </symbol>
+            <symbol viewBox="0 0 24 24" id="close">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/><path d="M0 0h24v24H0z" fill="none"/>
+            </symbol>
+        </svg>
+    </div>
+
+    <div class="container3 mt-5 text-center">
+        <h1 style="font-family:sans-serif;font-variant: small-caps;font-weight: bold;color: white;padding:25px">Liste de vos candidatures de Stage/Alternances</h1>
+        <ul class="list-group">
+            {% if user.candidatures is not empty %}
+                {% for staAlt in user.candidatures %}
+                    {% if staAlt.type == "Stage" %}
+                        {% set Type = "stage" %}
+                    {% else %}
+                        {% set Type = "alternance" %}
+                    {% endif %}
+
+                    <details>
+                        <summary>
+                            {{ staAlt.nom}} ({{ ( Type ) }})
+                            <svg class="control-icon control-icon-expand" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#expand-more" /></svg>
+                            <svg class="control-icon control-icon-close" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close" /></svg>
+                        </summary>
+                        <p style="text-align: justify;">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="{{ path('app_stage_alt_show', {'id': staAlt.id}) }}" class="linktest">
+                                    <span class="tername">Afficher les détails de ce Stage/Alterance </span>
+                                </a>
+                        <form action="{{ path('app_stage_alt_delCandidature', {'id': staAlt.id}) }}" method="post">
+                            <button type="submit" class="btn btn-danger">Retirer</button>
+                        </form>
+
+                        </li>
+                        </p>
+                    </details>
+                {% endfor %}
+
+                <h1 class="text-right mb-5"  style="color: #003399; margin-top: 40px">
+                    <a href="{{ path('app_stage_alt_cand') }}" class="btn btn-light">Consultez la liste des stages/alternances présentés</a>
+                </h1>
+
+            {% else %}
+                    {% if user.stageAlt %}
+                        <div id="flash-message" class="alert alert-success text-center font-weight-bold">
+                            Félicitation  {{ user.stageAlt.nom }} à été accepté .
+                        </div>
+                    {% else %}
+
+                        <p class="font-weight-bold text-center">Vous n'avez pas demandé de stage ou alternance.</p>
+                        <p class="text-center">Vous pouvez consulter la liste des stages/alternances présentés <a href="{{ path('app_stage_alt_cand') }}" class="linktest">ici</a>.</p>
+
+
+                    {% endif %}
+
+
+            {% endif %}
+        </ul>
+    </div><br>
+    <script>
+        // Get the flash message element
+        let flashMessage = document.getElementById("flash-message");
+
+        // Add the "show" class to the flash message element
+        flashMessage.classList.add("show");
+
+        // Remove the "show" class from the flash message element after 3 seconds
+        setTimeout(() => {
+            flashMessage.classList.remove("show");
+        }, 3);
+    </script>
+{% endblock %}

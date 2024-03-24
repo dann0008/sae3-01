@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emploi du temps{% endblock %}
+
+{% block body %}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js" integrity="sha256-7PzqE1MyWa/IV5vZumk1CVO6OQbaJE4ns7vmxuUP/7g=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+    <div id='calendar-container'>
+        <div id='edt'></div>
+    </div>
+
+    <!-- Modal show -->
+    <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Evenement :</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="edit-body-modal">
+                </div>
+                <div class="modal-footer" id="edit-footer">
+                    <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quitter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    <style>
+
+        #calendar-container {
+            width:80%;
+            margin: auto;
+            margin-top: 30px;
+            margin-bottom: 250px;
+            min-width: 500px;
+            position: relative;
+            z-index: 1;
+        }
+        #edt{
+            margin: 10px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.onload = ()=> {
+            let calendarElt = document.querySelector("#edt")
+
+            let calendar = new FullCalendar.Calendar(calendarElt, {
+                themeSystem: 'bootstrap5',
+                initialView: 'timeGridWeek',
+                height: 700,
+                locale: 'fr',
+                expandRows: true,
+                firstDay: 1,
+                navLinks: true,
+                hiddenDays: [0],
+                slotMinTime:'07:00:00',
+                slotMaxTime:'20:00:00',
+                timeZone: 'Europe/Paris',
+                businessHours:{
+                    daysOfWeek: [ 1, 2, 3, 4, 5, 6],
+                    startTime: '7:00',
+                    endTime: '21:00',
+                },
+                stickyHeaderDates: true,
+                selectable: true,
+                eventShortHeight: 10,
+                eventMaxStack:2,
+                buttonText:{
+                    today:'Aujourd\'hui',
+                    month:'Mois',
+                    week:'Semaine',
+                    day:'Jour',
+                    list:'Liste',
+                },
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                },
+                eventClick: function(info){
+                    let url = "/calendrier/"+info.event.id;
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', url);
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            document.getElementById("edit-body-modal").innerHTML = xhr.responseText;
+                        }
+                        else {
+                            window.close();
+                            alert('Erreur ouverture de la fenetre :' + xhr.status);
+                        }
+                    };
+                    xhr.send();
+
+                    var myModal = new bootstrap.Modal(document.getElementById('showModal'));
+                    myModal.show();
+
+                },
+                weekNumbers: true,
+                dayMaxEvents: true,
+                events: {{ data|raw}}
+
+
+            })
+
+
+            calendar.render()
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <ul xmlns="http://www.w3.org/1999/html">
+        {% for staAlt in stageAlt %}
+            <li>
+                <a href="{{ path('app_stage_alt_show', {id: staAlt.id}) }}">
+                    <span>{{ staAlt.nom }}</span>, <span> {{ staAlt.type }}</span>,
+                    <span> {{ staAlt.entreprise }}</span>, <span>{{ staAlt.dateDebut |date("d/m/Y") }}</span>,
+                    <span>{{ staAlt.dateFin |date("d/m/Y") }}</span>, <span>{{ staAlt.description }} </span>,
+                    <span> {{ staAlt.etudiantRetenu }}</span></a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

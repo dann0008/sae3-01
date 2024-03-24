@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% set titre = "Suppression de votre CV" %}
+
+{% block title %}{{ titre }}{% endblock %}
+
+{% block body %}
+    <h1>{{ titre }}</h1>
+
+    <span>Êtes-vous sûr de vouloir supprimer votre CV ?</span>
+
+    {{ form_start(form, {'method': 'POST', 'attr': {'class': 'd-flex'}}) }}
+    {{ form_widget(form.delete, {'label': 'Supprimer', 'attr': {'class': 'btn-primary'}  }) }}
+    {{ form_widget(form.cancel, {'label': 'Annuler', 'attr': {'class': 'btn-secondary'}  })  }}
+    {{ form_end(form) }}
+
+{% endblock %}

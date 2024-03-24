@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Utilisateurs{% endblock %}
+
+{% block body %}
+    <style> table, th, td {border: 1px solid; line-height: 2em; font-size: 1em;}
+        li {line-height: 2em;}
+
+    </style>
+
+    <h1>Liste de tous les Utilisateurs</h1>
+
+    <table>
+        <tr>
+            <td>Filter par :</td>
+            <td><a href="{{ path('app_utilisateur_entreprise') }}">Entreprise</a></td>
+            <td><a href="{{ path('app_utilisateur_etudiant') }}">Etudiant</a></td>
+            <td><a href="{{ path('app_utilisateur_personnel') }}">Personnel</a></td>
+        </tr>
+    </table>
+
+    <ul class="utilisateurs">
+        {% for utilisateur in utilisateurs %}
+            <li>
+        <a href="{{ path('app_utilisateur_show', {utilisateur: utilisateur.id}) }}"><span class="nom">{{ utilisateur.nom }}</span>
+            {% if utilisateur.prenom is not null %}
+                <span class="prenom">{{ utilisateur.prenom }}</span>
+            {% endif %}
+            {% if "ROLE_ETUDIANT" in utilisateur.roles %}
+                <span class="badge bg-secondary">Etudiant</span>
+            {% elseif "ROLE_PROFESSEUR" in utilisateur.roles %}
+                <span class="badge bg-secondary">Professeur</span>
+            {% elseif "ROLE_ENTREPRISE" in utilisateur.roles%}
+                <span class="badge bg-secondary">Entreprise</span>
+            {% else %}
+                <span class="badge bg-secondary">Administrateur</span>
+            {% endif %}
+        </a> <span class=""><a href="mailto:{{ utilisateur.email }}">Contacter</a></span></li>
+            <span> </span>
+            {% endfor %}
+    </ul>
+
+{% endblock %}

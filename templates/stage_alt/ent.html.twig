@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Votre liste de Stages et Alternances {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/css/liste_TER.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+
+    <div style="visibility: hidden; position: absolute; width: 0px; height: 0px;">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <symbol viewBox="0 0 24 24" id="expand-more">
+                <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/><path d="M0 0h24v24H0z" fill="none"/>
+            </symbol>
+            <symbol viewBox="0 0 24 24" id="close">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/><path d="M0 0h24v24H0z" fill="none"/>
+            </symbol>
+        </svg>
+    </div>
+
+    <div class="container3 mt-5 text-center">
+        <h1 style="font-family:sans-serif;font-variant: small-caps;font-weight: bold;color: white;padding:25px">Liste de vos Stages et Alternances</h1>
+
+        <ul  class="list-group" >
+            <h1 class="text-center mb-5"  style="color: #003399;">
+                <div class="float-right">
+                    <a class="btn btn-primary" href="{{ path('app_stage_alt_create')}}" style="background-color: #d41a52; color: white; border-color: #d41a52">Créer un Stage ou une Alternance<a/></a>
+                </div>
+            </h1>
+            {% if results %}
+                {% for StaAlt in results %}
+            <details open>
+                <summary>
+                    {{ StaAlt.nom}}
+                    <svg class="control-icon control-icon-expand" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#expand-more" /></svg>
+                    <svg class="control-icon control-icon-close" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close" /></svg>
+                </summary>
+                <p style="text-align: justify;"><li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a class="linktest" href="#">
+                            <span class="staltname"  ></span>
+                        </a>
+                        <form method="POST" action="{{ path('app_stage_alt_show', { 'id': StaAlt.id }) }}">
+                            <input type="hidden" name="StaAlt.id" value="{{ StaAlt.id }}">
+                            <button type="submit" id="btn" class="btn btn-primary add-btn" data-id="{{ StaAlt.id }}">Voir +</button><br><br>
+                            <div class="stalt-modify-section"></div>
+                </form>
+
+                </li></p>
+            </details>
+
+                {% endfor %}
+
+            {% else %}
+                Vous n'avez pas encore créé de Stage ou Alternance
+
+            {% endif %}
+
+        </ul>
+    </div><br>
+
+    <script>
+        const addBtns = document.querySelectorAll('.add-btn');
+
+        addBtns.forEach(btn => {
+            btn.addEventListener('click', event => {
+                const stagaltid = event.target.getAttribute('data-id');
+
+                event.preventDefault();
+
+                const staltnameNameSpan = event.target.closest('.list-group-item').querySelector('.staltname');
+                staltnameNameSpan.style.display = 'none'
+                fetch(`/stagealts/${stagaltid}?no_include=true`)
+                    .then(response => response.text())
+                    .then(html => {
+                        const modifySection = event.target.closest('.list-group-item').querySelector('.stalt-modify-section');
+                        modifySection.innerHTML = html;
+                        const closeBtns = modifySection.querySelectorAll('.close-btn');
+                        closeBtns.forEach(btn => {
+                            btn.addEventListener('click', event => {
+                                event.target.closest('.list-group-item').querySelector('.tername').style.display = 'block';
+                                event.target.closest('.stalt-modify-section').innerHTML = '';
+                            });
+                        });
+
+                    });
+            });
+        });
+
+    </script>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU" crossorigin="anonymous"></script>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+
+{% set titre = "Page d'Accueil" %}
+{% block title %}Profil de {{ utilisateur.nom }} {{ utilisateur.prenom }}{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/profils.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/footer.css') }}" rel="stylesheet">
+
+{% endblock %}
+{% block body %}
+
+
+    <div class="all_profile">
+        <div class="container2">
+            <div class="profile-header">
+                <div class="profile-img">
+                    <img src="{{ '/uploads/photos/' ~ utilisateur.photo ?? 'default_avatar.png'}}" width="200" alt="photo-{{ utilisateur.nom }}">
+                </div>
+                <div class="profile-nav-info">
+                    <h3 class="user-name" style="color:white;">{{ utilisateur.nom }} {{ utilisateur.prenom ?? '' }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-bd" style="margin-bottom: 10%">
+            <div class="left-side">
+                <div class="profile-side">
+                    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  color: gray; font-size: large; text-decoration: none;">
+                        Ici vous trouverez toutes les informations et données reliées à votre profil.
+                    </p>
+                </div>
+            </div>
+            <div class="right-side">
+
+                <div class="nav">
+                    <ul>
+                        <li class="user-post active">Vos informations d'identification</li>
+                    </ul>
+                    <div class="infos_param">
+
+                        {% if is_granted('ROLE_ENTREPRISE') %}
+                            <p><strong>Nom et Prénom :</strong> {{ utilisateur.nom }}</p><br>
+                        {% else %}
+                            <p><strong>Nom et Prénom :</strong> {{ utilisateur.nom }} {{ utilisateur.prenom }}</p><br>
+                        {% endif %}
+
+                        <p><strong>Email :</strong> {{ utilisateur.email }}</p><br>
+
+                        {% if utilisateur.classes is not null  and not is_granted('ROLE_ENTREPRISE') %}
+                            <strong>Classe :</strong>
+                            {% for classe in utilisateur.classes %}
+                                <span class="badge text-bg-light">{{ classe.nom }}</span>
+
+                            {% endfor %}<br><br>
+                        {% endif %}
+                        {% if app.user == utilisateur %}
+                            <p><strong>Télephone :</strong> {{ utilisateur.telephone }}</p><br>
+                            <p><strong>Adresse :</strong> {{ utilisateur.adresse }}</p><br>
+                            <p><strong>Ville :</strong> {{ utilisateur.codePostal }} - {{ utilisateur.ville }}</p><br>
+                        {% endif %}
+
+
+                        {% if 'ROLE_ETUDIANT' in utilisateur.roles %}
+                        <p style="display: inline;"><strong>CV :</strong></p><br>
+                        {% if utilisateur.cv is not null %}
+                        <p class="download_cv"> <a href="{{ '/uploads/cvs/' ~ utilisateur.cv}}" download>Télécharger CV</a></div>
+                    {% if (is_granted('ROLE_ETUDIANT') and app.user == utilisateur) or is_granted('ROLE_ADMIN') %}
+                        <p class="upload_cv"><a href="{{ path('app_utilisateur_cv', {utilisateur: utilisateur.id}) }}">Remplacer votre nouveau CV</a></p>
+                        <p class="delete_cv"><a href="{{ path('app_utilisateur_cv_delete', {utilisateur: utilisateur.id}) }}">Supprimer votre CV</a></p>
+                    {% endif %}
+                    {% else %}
+                        {% if (is_granted('ROLE_ETUDIANT') and app.user == utilisateur) or is_granted('ROLE_ADMIN') %}
+                            <p class="upload_cv"> <a href="{{ path('app_utilisateur_cv', {utilisateur: utilisateur.id}) }}">Ajouter votre CV</a></p>
+                        {% else %}
+                            <p style="display: inline;"> Aucun CV disponible</p>
+                        {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% if  app.user.id != utilisateur.id %}
+                        <br><br><br><br>
+                        <p style="display: inline;"><strong>Contacter :</strong></p><br>
+                        <p>
+                        {{ include('mailer/contactUser.html.twig', {'destinataire': utilisateur.email }) }}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let date1 = new Date();
+        let dateLocale = date1.toLocaleString('fr-FR',{year: 'numeric'});
+        document.getElementById('p1').innerHTML = dateLocale;
+    </script>
+
+{% endblock %}

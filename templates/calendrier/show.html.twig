@@ -1,0 +1,8 @@
+{% block body %}
+    <ul class="list-group">
+        <li class="list-group-item active" aria-current="true">{{ calendrier.titre }}</li>
+        <li class="list-group-item">{{ calendrier.debut ? calendrier.debut|date('H:i') : '' }} - {{ calendrier.fin ? calendrier.fin|date('H:i') : '' }}</li>
+        <li class="list-group-item">{{ calendrier.description }}</li>
+    </ul>
+{% endblock %}
+

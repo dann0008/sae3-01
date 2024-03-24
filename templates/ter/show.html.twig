@@ -1,0 +1,97 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Presentation {{ ter.nomSujet }}
+{% endblock %}
+
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/profils.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/footer.css') }}" rel="stylesheet">
+    <style>
+        .row {
+            color: #444444;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+            background: #fff;
+            margin-top: 10px;
+        }
+        #form{
+            width: 100%;
+            min-width: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius:8px;
+            scroll-behavior: smooth;
+        }
+
+        #btn{
+            min-width:90px;
+            border-color: white;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+
+        #btn:hover{
+            border-color: #ee9b00;
+            background-color:#ee9b00;
+            border-radius: 5px;
+        }
+
+    </style>
+
+{% endblock %}
+{% block body %}
+<!-- Pour ne pas repeter le code plusieurs fois, j'utilise le meme fichier css pour profil et le detail des TER puisque j'utilise a peu pres le meme croquis !-->
+
+    <div class="all_profile" style="margin-top: -90px">
+        <div class="container2">
+            <div class="profile-header" style="background-color: #c9184a">
+
+                <div class="profile-nav-info" >
+                    <h3 class="user-name" style="color:white; margin-left: 0.4em">{{ ter.nomSujet }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-bd" style="margin-bottom: 5%">
+            <div class="left-side">
+                <div class="profile-side">
+                    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  color: gray; font-size: large; text-decoration: none;">
+                        Ici vous trouverez toutes les informations concernant le TER choisit.
+                    </p>
+                </div>
+            </div>
+            <div class="right-side">
+
+                <div class="nav">
+                    <div class="infos_param">
+                        <p><strong>Sujet :</strong> {{ ter.nomSujet }}</p><br>
+                        <p><strong>Créateur du sujet :</strong> {{ ter.createur.nom}} {{ ter.createur.prenom }}</p><br>
+                        <p id="desc"><strong>Description :</strong> {{ ter.description }}</p><br>
+                        {% if  app.user.id != ter.createur.id %}
+
+                            <p style="display: inline;"><strong>Contacter :</strong><br>
+                            <form action="{{ path('app_contact_ter') }}" method="POST" role="form" class="php-email-form">
+                                <div class="row">
+                                </div>
+                                <div id="form" class="form-group mt-3">
+                                    <input type="hidden" name="destinataire" value={{ ter.createur.email }}>
+                                    <input type="hidden" name="utilisateur" value="{{ ter.id }}">
+                                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Objet" required>
+                                </div>
+                                <div id="form" class="form-group mt-3">
+                                    <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                                </div><br>
+                                <div  class="text-center"><button id="btn" type="submit">Envoi</button></div>
+
+                            </form>
+                            </p>
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+
+{% block body %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <div class="infos_param"><br>
+    <p style="text-align: justify; font-size: 17px"><strong>Déscription : </strong>{{ stageAlt.description }} </p><br>
+    {% if stageAlt.candidats|length > 0 %}
+        {% for etu in stageAlt.candidats %}
+            <p style="text-align: justify; display: inline; font-size: 17px">{{ etu.getNom() }} : </p>
+            <!-- Bouton Accepter -->
+            <a style="display: inline" href="{{ path('affect_stage_to_user', {'stageAlt_id': stageAlt.id ,  'user_id':etu.getId()}) }}" >
+            <span class="material-symbols-outlined">done</span></a>&thinsp;&thinsp;
+            <!-- Bouton "Refuser" -->
+            <a style="display: inline" href="{{ path('unaffect_stage_to_user', {'stageAlt_id': stageAlt.id ,  'user_id':etu.getId()}) }}">
+                <span class="material-symbols-outlined">delete</span></a>&thinsp;&thinsp;
+            <!-- Bouton "Refuser" -->
+            <a style="display: inline" href="{{ path('app_utilisateur_show', {'utilisateur': etu.getId()}) }}">
+                <span class="material-symbols-outlined">person</span>
+
+        </a><br><br>
+        {% endfor %}
+    {% else %}
+        {% if stageAlt.etudiant_retenu %}
+                L'etudiant qui a été affecté est {{ stageAlt.etudiant_retenu.nom }}
+            <a href="{{ path('app_utilisateur_show', {'utilisateur': stageAlt.etudiant_retenu.getId()}) }}" class="btn btn-primary mr-3">
+            Accéder au Profil </a>
+            <br>
+            {% else  %}
+                    {% if stageAlt.type == 'Alternance'  %}
+
+                    <p style="text-align: justify; color: #970a3d; text-decoration: underline">Vous n'avez pas de demande pour votre alternance </p><br>
+
+                        {% else  %}
+                            <p style="text-align: justify; color: #970a3d; text-decoration: underline">Vous n'avez pas de demande pour votre stage</p><br>
+                    {% endif %}
+        {% endif %}
+
+    {% endif %}
+    <a href="{{ path('app_stage_alt_update', {'id': stageAlt.id}) }}" class="btn btn-primary" style="color:white; background-color: #008400; border-color: #008400">Modifier</a>
+    <a href="{{ path('app_stage_alt_delete', {'id': stageAlt.id}) }}" class="btn btn-danger">Supprimer</a>
+    </div>
+
+{% endblock %}
+

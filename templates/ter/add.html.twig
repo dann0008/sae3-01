@@ -1,0 +1,41 @@
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/liste_TER.css') }}" rel="stylesheet">
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="infos_param"><br>
+        <p style="text-align: center"><strong>Créateur du sujet : </strong>{{ ter.createur.nom }} {{ ter.createur.prenom }}</p>
+        <p style="text-align: justify"><strong>Description: </strong>{{ ter.description }}</p>
+    </div>
+
+        <div class="text-center mt-5">
+            {% if user.ter  is null  %}
+                    {% if user.candidaturesTers|length < 3 %}
+                        <a href="{{ path('add_ter_to_user', {'ter_id': ter.id}) }}" class="btn btn-primary mr-3">
+                            Ajouter le TER à vos liste de souhaits
+                        </a>
+                        <button type="button" id="btn2" class="btn btn-secondary close-btn">Fermer</button>
+
+                    {% else %}
+                        <div class="alert alert-danger font-weight-bold text-uppercase">
+                            La limite de candidatures est atteinte !
+                        </div>
+                        <button type="button" id="btn2" class="btn btn-secondary close-btn">Fermer</button>
+
+                    {% endif %}
+            {% else  %}
+            <div class="alert alert-danger font-weight-bold text-uppercase">
+                Un TER vous a déjà été attribué !!
+            </div>
+            <button type="button" id="btn2" class="btn btn-secondary close-btn">Fermer</button>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

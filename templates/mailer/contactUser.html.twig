@@ -1,0 +1,55 @@
+<form action="{{ path('app_contact_user') }}" method="POST" role="form" class="php-email-form">
+
+
+    <style>
+        .row {
+            color: #444444;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+            background: #fff;
+            margin-top: 10px;
+        }
+        #form{
+            width: 100%;
+            min-width: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius:8px;
+            scroll-behavior: smooth;
+        }
+
+        #btn{
+            min-width:90px;
+            border-color: white;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+
+        #btn:hover{
+            border-color: #ee9b00;
+            background-color:#ee9b00;
+            border-radius: 5px;
+        }
+
+    </style>
+    <div class="row">
+    </div>
+    <div id="form" class="form-group mt-3">
+        <input type="hidden" name="destinataire" value={{ destinataire }}>
+        <input type="hidden" name="utilisateur" value="{{ utilisateur.id }}">
+        <input type="text" class="form-control" name="subject" id="subject" placeholder="Objet" required>
+    </div>
+    <div id="form" class="form-group mt-3">
+        <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+    </div><br>
+    <div  class="text-center"><button id="btn" type="submit">Envoi</button></div>
+
+</form>
+
+
+
+
+{#Pour inclure le formulaire:#}
+{#{{ include('mailer/contactUser.html.twig', {'destinataire':'{{ destinataire? }}'}) }}#}
+

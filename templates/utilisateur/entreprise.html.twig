@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Entreprises{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/trombinoscope.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+
+    <div class="site-container">
+    <div class="site-pusher">
+
+<br>
+    <header class="header">
+        <a href="#" class="header__icon" id="header__icon"></a>
+        <a href="#" class="header__logo">Trombinoscope</a>
+
+        <nav class="menu">
+            <a href="{{ path('app_utilisateur_entreprise') }}">Entreprise</a>
+            <a href="{{ path('app_utilisateur_etudiant') }}">Etudiant</a>
+            <a href="{{ path('app_utilisateur_personnel') }}">Personnel</a>
+        </nav><br>
+
+    </header>
+
+    <h2 style="color: white; font-family: 'roberto'; text-align: center">Toutes les Entreprises</h2><bR>
+
+    <div class="wrapper">
+        {% for entreprise in entreprises %}
+            <div class="eleve" >
+                    <div class="photo"> <img src="{{ '/uploads/photos/' ~ entreprise.photo ?? 'default_avatar.png'}}" width="100" alt="photo-{{ entreprise.nom }}"></div>
+                    <a href="{{ path('app_utilisateur_show', {utilisateur: entreprise.id}) }}">
+                    <div class="nom_alter">
+                    {% if entreprise.prenom is not null %}
+                        <h6>{{ entreprise.nom }} {{ entreprise.prenom }}</h6>
+                    {% else %}
+                        <h6>{{ entreprise.nom }}</h6>
+                    {% endif %}
+                        <a href="mailto:{{ entreprise.email }}">Contacter</a>
+                    </div></a></div>
+        {% endfor %}
+    </div></div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            (function($) {
+
+                $('#header__icon').click(function(e){
+                    e.preventDefault();
+                    $('body').toggleClass('with--sidebar');
+                });
+
+                $('#site-cache').click(function(e){
+                    $('body').removeClass('with--sidebar');
+                });
+
+            })(jQuery);
+
+        });
+    </script>
+{% endblock %}
